@@ -9,6 +9,7 @@ const operatorButtons = document.querySelectorAll(".operator");
 
 // Stores the first operand entered before selecting an operator
 let firstValue;
+let secondValue;
 
 // Stores the currently selected operator
 // Empty string means no operator has been selected yet
@@ -16,7 +17,8 @@ let operator = "";
 
 // Initial UI state setup
 changeBtnState();
-changeBtnOpState();
+// changeBtnOpState();
+
 
 /**
  * Toggles the enabled/disabled state of the result button.
@@ -24,18 +26,8 @@ changeBtnOpState();
  */
 function changeBtnState(){
     buttonResult.disabled = !buttonResult.disabled;
-    console.log(buttonResult.disabled);
 }
 
-/**
- * Toggles the enabled/disabled state of all operator buttons.
- * Useful for controlling the calculator flow.
- */
-function changeBtnOpState(){
-    operatorButtons.forEach(btn => {
-        btn.disabled = !btn.disabled;
-    });
-}
 
 /**
  * Appends a numeric value to the screen.
@@ -44,6 +36,7 @@ function changeBtnOpState(){
 function addNumber(value){
     screen.value += value;  
 }
+
 
 /**
  * Handles operator selection.
@@ -54,10 +47,11 @@ function addNumber(value){
 function addOperator(op, clickedButton){
 
     if(screen.value !== ""){
-        firstValue = parseInt(screen.value);
-        operator = op;
+         firstValue = parseInt(screen.value);   
+         erasePreviusNumber();  
     }
 
+    operator = op;
     // Remove active state from all operators
     operatorButtons.forEach(btn => {
         btn.classList.remove("active");
@@ -65,6 +59,13 @@ function addOperator(op, clickedButton){
 
     // Highlight the selected operator
     clickedButton.classList.add("active");
+
+    console.log(op);
+}
+
+function erasePreviusNumber(){
+    screen.value = "";
+    changeBtnState();
 }
 
 /**
@@ -72,29 +73,31 @@ function addOperator(op, clickedButton){
  * Uses the stored firstValue and the current screen value.
  */
 function calculateResult(){
-    console.log("result...");
+  
+    if(screen.value !== ""){
+        switch(operator){
 
-    switch(operator){
+            case "X":
+                screen.value = firstValue * screen.value;
+                break;
 
-        case "X":
-            screen.value = firstValue * parseInt(screen.value);
-            break;
+            case "+":
+                screen.value = firstValue + parseInt(screen.value);
+                break;
 
-        case "+":
-            screen.value = firstValue + parseInt(screen.value);
-            break;
+            case "-":
+                screen.value = firstValue - parseInt(screen.value);
+                break;
 
-        case "-":
-            screen.value = firstValue - parseInt(screen.value);
-            break;
+            case "%":
+                screen.value = firstValue / parseInt(screen.value);
+                break;
+        }
 
-        case "%":
-            screen.value = firstValue / parseInt(screen.value);
-            break;
+        // Reset operator UI after calculation
+        cleanOperatorUI();
+        changeBtnState();
     }
-
-    // Reset operator UI after calculation
-    cleanOperatorUI();
 }
 
 /**
@@ -105,6 +108,7 @@ function resetComponetsUI(){
     screen.value = "";
     changeBtnState();
     cleanOperatorUI();
+    operator = "";
 }
 
 /**
@@ -114,3 +118,7 @@ function resetComponetsUI(){
 function cleanOperatorUI(){
     operatorButtons.forEach(btn => btn.classList.remove("active"));
 }
+
+
+
+

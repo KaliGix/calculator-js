@@ -1,0 +1,139 @@
+====================================================================================
+                        Javascript advanced concepts
+====================================================================================
+
+contexto de ejecucion: Es un concepto que usa el motor de javascript de tal forma que puede ser un contenedor 
+para organizar ciertos bloques de codigo de una determinada aplicacion.
+
+contexto Global: este es cuando determinada declaracion pertenece al objeto global de javascript o cuando
+se crea codigo fuera de una funcion.
+
+contexto de la funcion: es cuando se crea una funcion con su estructura 
+
+lexico del entorno: esto es como si se creara una caja dentro de otra caja y donde se analiza donde fue declarada la
+variable. Asi que va buscando escalon por escalon cuando se referencia una variable desde una funcion.
+
+Window: este es el objeto global que crea javascript una vez se ejecuta el codigo. 
+
+
+====================================================================================
+
+                            Fases del contexto de ejecucion
+
+====================================================================================
+
+
+1. Fase de creacion
+2. Fase de ejecucion
+
+                      ============== Fase de creacion ===============
+    contexto global
+
+    1.Primeo se crea el objeto global Window
+    2. Se referencia al objeto global con this(si comparas window===this sera igual a true)
+    3. Luego se guarda en memoria las variables y la funciones que se declaran con el keyword(var)
+
+    example: 
+
+    ======== Memoria===========                       ==========Codigo===========
+    temp = undefined;                                      Test();
+    Test();                                                temp = 12;
+
+                                                           var temp;
+                                                           function Test(){
+                                                              console.log("hello")
+                                                           }
+
+
+    Contexto de la funcion
+
+    1. Crea el objeto this y lo referencia a desde donde se invoco la funcion. 
+       Si no hubo una invocacion, entonces este hace referencia al objeto global.
+
+       Example 1:
+
+       ========= Code ===========
+
+       function GreetPeople(){
+
+        console.log(this); 
+       }                                                    
+
+       GreetPeople(); // this will print the global object 'window'
+
+       Example 2:
+
+       const btn = document.getElementById("btn").addEventListener('click', clickedbtn);
+
+       function clickedbtn(){
+
+        console.log(this); // this will print the object btn
+       }
+    
+    2. Se crea un objeto 'argument' que es como si fuera un arreglo de los parametros que recibe una funcion.
+
+       Example:
+
+       function characterInfo(health, damage){
+
+           console.log(argument);
+       }
+
+       characterInfo(500, 20); //[500, 20]
+
+    3. Luego se crean las funciones y variables que usan la keyword 'var'. Esto se conoce como 'hoisting'.
+
+
+               ==================== Fase de ejecucion =====================
+
+    1. El codigo empieza a ejecutarse linea por linea
+    2. Cuando una funcion finaliza, el contexto y todas sus variables son destruidas por el motor de Javascript.
+
+    ********* Note ************
+
+    A diferencia del objeto global que permanece activo durante toda la ejecucion del programa o aplicacion, el contexto de la funcion
+    muere o son eliminadas de la memoria una vez que esta finaliza su ejecucion. 
+
+============================= Alcance y cadena de alcance =====================================
+
+   Cuando desde una funcion hacemos referencia a una variable, el motor de javascript busca la variable en el scope de la funcion. Sino 
+   la encuentra entonces sube un nivel hasta llegar al scope global.
+
+   Scope Local: es todo el codigo contenido o declarado dentro de una funcion y solo se puede acceder desde dentro de la funcion.
+
+   Scope Global: es cuando una variable se declara fuera de una funcion y se puede acceder a ella desde cualquier parte de la aplicacion.
+
+   ************************************* Note ************************************************
+   *                                                                                         *
+   *******************************************************************************************
+
+   Cuando una variable se declara en estructuras de control como if, for, while, switch ,etc se puede acceder a ella sin ningun problema ya
+   que pasa a formar parte del scope global.
+
+======================================== Pila de ejecucion ===========================================
+
+   El motor de javascript va colocando en orden la ejecucion de las funciones que se van ejecutando. El objeto global siempre vive durante la ejecucion
+   de la aplicacion.Una vez una funcion retorna o finaliza , se va eliminadas de la pila de ejecucion.
+
+   Las pilas siguen el principio FILO(First In, First Out)
+
+   Es decir, la pirmera funcion que entra en la pila de ejecucion sera la ultima en ser destruida.
+
+   Aqui aparece otro concepto que es =================== cola de mensajes ========================
+
+   Esta va guardando ciertas funciones especificas que tendran lugar en la pila de ejecucion una vez que la pila este vacia. 
+
+   La cola de mensaje sigue el principio FIFO (First In, First Out). El primer elemento en entrar sera el primero en salir.
+
+   Algunas funciones que se guardan en la cola de mesajes son : 
+   
+   1. un evento de interaccion de usuario como click o scroll
+   2. promeses
+   3. Async / await
+   4.setTimeOut and setInterval
+
+   Asi que a todo esto se le llama ========================= Bucle de eventos ======================================
+
+
+
+
