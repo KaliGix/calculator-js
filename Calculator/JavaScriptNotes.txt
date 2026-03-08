@@ -2,6 +2,13 @@
                         Javascript advanced concepts
 ====================================================================================
 
+
+
+************************************** LESSON 1 ************************************************
+*                                                                                              *  
+*                                                                                              *
+************************************************************************************************
+
 contexto de ejecucion: Es un concepto que usa el motor de javascript de tal forma que puede ser un contenedor 
 para organizar ciertos bloques de codigo de una determinada aplicacion.
 
@@ -135,5 +142,133 @@ Window: este es el objeto global que crea javascript una vez se ejecuta el codig
    Asi que a todo esto se le llama ========================= Bucle de eventos ======================================
 
 
+************************************** LESSON 2 ************************************************
+*                                                                                              *  
+*                                                                                              *
+************************************************************************************************
 
+   ==============================================Tipos y objetos en Javascript ============================================
+
+   La diferencia entre tipos primitivos y objetos en javascript es que al usar la comparacion simpe == javascript hace
+   referencia al objeto y no a su valor. Contrario con los tipos primitivos que compara su valor 
+
+      example:
+            if(20 == 20)// la condicion es verdadera. ya que compara valores
+               console.log(true);
+
+            if([]=[])// aqui hace referencia y la condicion nunca se cumple
+               console.log("message");
+
+ademas los objetos brindan accesos a algunos metodos de forma nativa
+
+En javascript tipos primitivos como String brinda acceso a metodos pero se hace una conversion implicita a la clase String
+
+   example:
+      var cadena = "Hola";
+
+      console.log(cadena.length);// es como hacer cadena = new String();
+
+
+================================== Coercion al comparar tipos ============================================
+
+el comparador simple == no se recomienda ya que hace una conversion de tipo cuando va a comparar valores y puede que 
+el resultado no sea el deseado. Se recomienda siempre el uso del comparador estricto === que no realiza conversion de tipo.
+
+   
+================================== Prototipo y cadena de Prototipo ========================================
+
+El Prototipo en javascript es lo que permite heredar comportamiento a otros prototipos, de forma que esto ahorra recursos
+o memoria. 
+
+para declarar un prototipo se hace lo siguiente: 
+
+         const Person = function(name){
+             this.name = name;
+         }
+
+         //Aqui se agrega el metodo al objeto prototipo
+            ___proto___
+         Person.prototype.setName(){
+               console.log("My name is: " + name);
+         }
+
+sin embargo, tambien javascript permite declarar e instanciar clases. Basicamente , las clases son prototipos pero con una 
+sintaxis mas limpia y elegante. 
+
+   example:
+
+      class Person {
+         constructor(name){
+               this.name = name;
+         }
+
+         setName(){
+            console.log("My name is : "+ name);
+         }
+      }
+
+para usar tanto los prototipos como las clases es necesario hacer instancias de los objetos.
+
+example: 
+      const person1 = new Person();
+      person1.setName("kalibell");
+
+
+************************************** LESSON 3 ************************************************
+*                                                                                              *  
+*                                                                                              *
+************************************************************************************************
+
+============================= Manejo de estructura de datos en javascript =====================================
+
+///////////////////////////////// Map ///////////////////////////////////////////////////////// 
+Los objetos Map son un diccionario de datos donde se pueden usar keys de diferentes tipos. Aqui las keys hacen 
+una referencia persistente o fuertes a sus valores. Lo que significa que si se elimia el objeto o cualquier otro tipo
+de dato como key, el varlor permanece en memoria. 
+
+      example of use:
+
+      const userInfo = new Map();
+
+      //se declara objeto y diferentes tipos de datos para usarlo como key
+       key1 = [];
+       let key2= 2;
+       let key3 = false;
+
+      //de esta forma se llena el objeto Map o diccionario. con el metodo set
+       userInfo.set(key1, "this is a message");
+       userInfo.set(key2, "this is a message 2");
+       userInfo.set(key3, "this is a message 3");
+
+      //de esta forma se accede a la informacion del diccionario
+      //se imprime el mensaje contenido o el value
+      console.log(userInfo.get(key3));
+
+      
+      //se usa la funcion has que retorna un valor boolean true si encuentra el key asignado encuentra el registro
+      if(userInfo.has(key2))
+         console.log("User exists");
+
+
+///////////////////////////////////// weakMap ///////////////////////////////////////////////////
+
+Estos tambien son diccionarios de datos pero a difrencia de Map es que estos con sus keys hacen una referencia debil 
+a los valores. Asi que si el garbage collection elimina el objeto que hace referencia, el valor se puede perder. 
+
+Otra difrencia con Map, es que weakMap solo acepta tipo objeto como key. si se envia cualquier tipo primitivo este 
+arrojara un error en consola. 
+
+   example of use:
+
+      const animal = new weakMap();
+
+      let key = 10;
+      object = [];
+      
+      animal.set(key, "message for you");// dara error en consola ya que solo admite tipo objetct como key
+      animal.set(object, "message for me");
+
+      object = null; //aqui se asigna null al objeto por lo que se perdera la referencia
+
+      consola.log(animal.get(object)); // undefined
 

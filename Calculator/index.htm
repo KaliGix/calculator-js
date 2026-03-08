@@ -16,22 +16,22 @@
         </div>
 
         <div class="container-buttons">
-            <button type="button" class="btn" onclick="addNumber(this.textContent);">1</button>
-            <button type="button" class="btn" onclick="addNumber(this.textContent)">2</button>
-            <button type="button" class="btn" onclick="addNumber(this.textContent)">3</button>
-            <button type="button" class="btn operator" onclick="addOperator(this.textContent,this)">X</button>
-            <button type="button" class="btn"onclick="addNumber(this.textContent)">4</button>
-            <button type="button" class="btn" onclick="addNumber(this.textContent)">5</button>
-            <button type="button" class="btn" onclick="addNumber(this.textContent)">6</button>
-            <button type="button" class="btn operator" onclick="addOperator(this.textContent,this)">+</button>
-            <button type="button" class="btn" onclick="addNumber(this.textContent)">7</button>
-            <button type="button" class="btn" onclick="addNumber(this.textContent)">8</button>
-            <button type="button" class="btn" onclick="addNumber(this.textContent)">9</button>
-             <button type="button" class="btn operator" onclick="addOperator(this.textContent, this)">-</button>
-            <button type="button" class="btn" onclick="addNumber(this.textContent)">0</button>
+            <button type="button" class="btn addnumer" >1</button>
+            <button type="button" class="btn addnumer" >2</button>
+            <button type="button" class="btn addnumer" >3</button>
+            <button type="button" class="btn operator" onclick="doMath(this.textContent,this)">X</button>
+            <button type="button" class="btn addnumer">4</button>
+            <button type="button" class="btn addnumer" >5</button>
+            <button type="button" class="btn addnumer" >6</button>
+            <button type="button" class="btn operator" onclick="doMath(this.textContent,this)">+</button>
+            <button type="button" class="btn addnumer" >7</button>
+            <button type="button" class="btn addnumer">8</button>
+            <button type="button" class="btn addnumer">9</button>
+             <button type="button" class="btn operator" onclick="doMath(this.textContent, this)">-</button>
+            <button type="button" class="btn addnumer">0</button>
             <button type="button" class="btn clear" onclick="resetComponetsUI()">AC</button>
             <button type="button" class="btn result" onclick="calculateResult()">=</button>   
-            <button type="button" class="btn operator" onclick="addOperator(this.textContent, this)">%</button>
+            <button type="button" class="btn operator" onclick="doMath(this.textContent, this)">%</button>
         </div>
         
     

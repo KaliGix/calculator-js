@@ -7,6 +7,15 @@ const buttonResult = document.querySelector(".result");
 // All operator buttons (+, -, X, %)
 const operatorButtons = document.querySelectorAll(".operator");
 
+
+const numberButtons = document.querySelectorAll(".addnumer");
+
+//When we use queryselectorAll we must iterate all the elment and add the event to each one
+//otherwise will be an error. QuerySelectorAll return a NodeList
+numberButtons.forEach(btn => {
+    btn.addEventListener("click",addNumber)
+});
+
 // Stores the first operand entered before selecting an operator
 let firstValue;
 let secondValue;
@@ -33,10 +42,12 @@ function changeBtnState(){
  * Appends a numeric value to the screen.
  * Called every time a number button is pressed.
  */
-function addNumber(value){
-    screen.value += value;  
-}
 
+//when we click javascript create the event objet en send it to the function
+//
+function addNumber(event){
+    screen.value += event.target.textContent;  
+}
 
 /**
  * Handles operator selection.
@@ -44,7 +55,7 @@ function addNumber(value){
  * - Stores the selected operator
  * - Updates the UI to reflect the active operator
  */
-function addOperator(op, clickedButton){
+function doMath(op, clickedButton){
 
     if(screen.value !== ""){
          firstValue = parseInt(screen.value);   
@@ -64,7 +75,7 @@ function addOperator(op, clickedButton){
 }
 
 function erasePreviusNumber(){
-    screen.value = "";
+     screen.value = "";
     changeBtnState();
 }
 
@@ -74,6 +85,7 @@ function erasePreviusNumber(){
  */
 function calculateResult(){
   
+    
     if(screen.value !== ""){
         switch(operator){
 
