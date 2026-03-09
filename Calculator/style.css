@@ -2,7 +2,7 @@
     margin: 10% auto;
     background-color: black;
     width: 400px;
-    height: 300px;
+    height: 500px;
     padding: 20px;
     border-radius: 40px;
     
@@ -15,7 +15,7 @@
 
 .container-screen input {
     width: 100%;
-    height: 60px;
+    height: 100px;
     text-align: right;
     box-sizing: border-box;
    
@@ -33,7 +33,7 @@
 }
 
  .btn{
-    height: 55px;
+    height: 90px;
     border-radius: 5px;
     font-size: 20px;
     background-color: rgb(119, 115, 115);
