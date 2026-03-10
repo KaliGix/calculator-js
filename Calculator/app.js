@@ -1,21 +1,12 @@
-// Input element that displays the current value and results
+
 const screen = document.querySelector(".screen");
-
-// Button used to calculate the result (=)
 const buttonResult = document.querySelector(".result");
-
-// All operator buttons (+, -, X, %)
 const operatorButtons = document.querySelectorAll(".operator");
-
-
 const numberButtons = document.querySelectorAll(".addnumer");
 
-//When we use queryselectorAll we must iterate all the elment and add the event to each one
-//otherwise will be an error. QuerySelectorAll return a NodeList
 numberButtons.forEach(btn => {
     btn.addEventListener("click",addNumber);
 });
-
 
 let firstValue = null;
 let getPreviusValue = "";
@@ -31,6 +22,10 @@ function addNumber(event){
     }
     else
         screen.value += event.target.textContent;
+
+    operatorButtons.forEach(btn => {
+        btn.classList.remove('active');
+    })
         
 }
 
