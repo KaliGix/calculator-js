@@ -13,120 +13,84 @@ const numberButtons = document.querySelectorAll(".addnumer");
 //When we use queryselectorAll we must iterate all the elment and add the event to each one
 //otherwise will be an error. QuerySelectorAll return a NodeList
 numberButtons.forEach(btn => {
-    btn.addEventListener("click",addNumber)
+    btn.addEventListener("click",addNumber);
 });
 
-// Stores the first operand entered before selecting an operator
-let firstValue;
-let secondValue;
 
-// Stores the currently selected operator
-// Empty string means no operator has been selected yet
+let firstValue = null;
+let getPreviusValue = "";
+let waitingForNumber = false;
 let operator = "";
 
-// Initial UI state setup
-changeBtnState();
-// changeBtnOpState();
 
-
-/**
- * Toggles the enabled/disabled state of the result button.
- * Used to control when the user is allowed to calculate.
- */
-function changeBtnState(){
-    buttonResult.disabled = !buttonResult.disabled;
-}
-
-
-/**
- * Appends a numeric value to the screen.
- * Called every time a number button is pressed.
- */
-
-//when we click javascript create the event objet en send it to the function
-//
 function addNumber(event){
-    screen.value += event.target.textContent;  
+      
+    if(waitingForNumber){
+        screen.value = event.target.textContent;
+        waitingForNumber = false;
+    }
+    else
+        screen.value += event.target.textContent;
+        
 }
 
-/**
- * Handles operator selection.
- * - Saves the current screen value as the first operand
- * - Stores the selected operator
- * - Updates the UI to reflect the active operator
- */
 function doMath(op, clickedButton){
 
     if(screen.value !== ""){
          firstValue = parseInt(screen.value);   
-         erasePreviusNumber();  
+         operator = op;
+         waitingForNumber = true;
     }
 
-    operator = op;
-    // Remove active state from all operators
     operatorButtons.forEach(btn => {
         btn.classList.remove("active");
     });
 
-    // Highlight the selected operator
     clickedButton.classList.add("active");
-
-    console.log(op);
 }
 
-function erasePreviusNumber(){
-     screen.value = "";
-    changeBtnState();
-}
 
-/**
- * Executes the calculation based on the selected operator.
- * Uses the stored firstValue and the current screen value.
- */
 function calculateResult(){
-  
     
-    if(screen.value !== ""){
+    if(firstValue!== null && !waitingForNumber){
+           
+        var lastValue = Number(screen.value);
         switch(operator){
 
             case "X":
-                screen.value = firstValue * screen.value;
+                screen.value = firstValue * lastValue;
                 break;
 
             case "+":
-                screen.value = firstValue + parseInt(screen.value);
+                screen.value = firstValue + lastValue;
                 break;
 
             case "-":
-                screen.value = firstValue - parseInt(screen.value);
+                screen.value = firstValue - lastValue;
                 break;
 
             case "%":
-                screen.value = firstValue / parseInt(screen.value);
+                if(lastValue !==0)
+                    screen.value = firstValue / lastValue;
+                else
+                    screen.value = "Error";
                 break;
         }
-
-        // Reset operator UI after calculation
+       
         cleanOperatorUI();
-        changeBtnState();
+        firstValue = null;
     }
+    else
+        throw new Error("You should enter numbers and operator before getting a result.");
 }
 
-/**
- * Resets the calculator UI without clearing stored logic.
- * Used when starting a new operation.
- */
-function resetComponetsUI(){
+function resetValues(){
     screen.value = "";
-    changeBtnState();
     cleanOperatorUI();
     operator = "";
+    firstValue = null; 
 }
 
-/**
- * Removes the active state from all operator buttons.
- * Keeps UI and internal state in sync.
- */
 function cleanOperatorUI(){
     operatorButtons.forEach(btn => btn.classList.remove("active"));
 }

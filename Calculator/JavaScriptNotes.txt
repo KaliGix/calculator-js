@@ -272,3 +272,71 @@ arrojara un error en consola.
 
       consola.log(animal.get(object)); // undefined
 
+////////////////////////////////////Set and WeakSet///////////////////////////////////////
+
+El objeto set se encarga de que los varlores sean unicos. Por lo que si agregarmos un dato que ya se encuentra
+en la lista, pues no agregara el nuevo valor. 
+
+Este objeto admite cualquier tipo de dato y mantiene una fuerte referencia a su key.
+
+El WeakSet, a diferencia del set solo admite objetos como keys. Si se le envia un dato de otro tipo 
+lanzara un error en consola. 
+
+Ademas este mantiene una referenica debil a su key.
+
+/////////////////////////// Objects /*//////////////////////////////////////////////////////
+
+Los objetos no son iterables. Esto quiere decir que si usamos la sentencia for ...of dara error en consola. 
+
+Si queremos iterar tenemos varias formas de hacerlo.
+   1.Objects.keys(object)
+   2.Objects.values(object)
+   3.Objects.entries(object)
+   4. o usando el protocolo [symbol.iteraror]() dentro del objeto para que pueda iterar
+
+
+   ///////////////////////////Destructuring //////////////////////////////////////////////
+
+   Usamos la desestructuracion para poder usar las propiedades que contienen los objetos como una variable
+   independiente. 
+
+   antes podiamos acceder de forma directa a la propiedadades. Pero con ECMAC Script 6 podemos usarlas de otras 
+   formas.
+
+      Example:
+               var book = { title: "Atomic Habit", autor: "James Clear"};
+               const key = 'autor';
+
+               var {[key] : value} = book
+               console.log(value);
+
+tambien podemos usarlo para concatenar arryas. Que en muchos casos se usa la funcion Concat();
+
+   example :
+       const array = [40, 58, 47, 10];
+
+       //... rest operator
+       const otherArray = [...array, 100, 200];
+
+       otherArray.foreach(value => {
+         consola.log(value);
+       });
+
+   ///////////////////////////////////function generator////////////////////////////////////////////
+
+   Esta es una funcion especial pues nos permite hacer que una funcion sea iterable.
+
+   para usarla agregarmos un * despues de la keyword function. Ademas usamos el keyword yield dentro de la funcion
+   lo que le ordenara al motor de javascript que se detenga la funcion en ese punto. 
+
+   para seguir llamando otro bloque de codigo debemos usar el metodo next() o podemos usar la estructura 
+   for ...of.  
+
+
+************************************** LESSON 4 ************************************************
+*                                                                                              *  
+*                                                                                              *
+************************************************************************************************
+
+
+*************************************** Proxies en JavaScript **************************************************
