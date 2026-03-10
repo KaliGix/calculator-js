@@ -67,8 +67,10 @@ function calculateResult(){
             case "%":
                 if(lastValue !==0)
                     screen.value = firstValue / lastValue;
-                else
-                    screen.value = "Error";
+                else{
+                    screen.classList.add('errorMessage');
+                    screen.value ="Error";
+                }
                 break;
         }
        
