@@ -17,9 +17,12 @@ function addNumber(event) {
 
   if (waitingForNumber) {
     screen.value = event.target.textContent;
-    lastValue += Number(screen.value);
+    lastValue = Number(screen.value);
     waitingForNumber = false;
-  } else screen.value += event.target.textContent;
+    console.log("Lastvalue" + lastValue);
+  } else {
+    screen.value += event.target.textContent;
+  }
 
   operatorButtons.forEach((btn) => {
     btn.classList.remove("active");
@@ -32,8 +35,9 @@ function removeErrorMessage() {
 }
 
 function doMath(op, clickedButton) {
-  if (screen.value !== "") {
-    firstValue = lastValue != null ? lastValue : Number(screen.value);
+  if (screen.value !== "" ) {
+    firstValue = Number(screen.value);
+    console.log("firstvalue" + firstValue);
     operator = op;
     waitingForNumber = true;
     console.log("Enter the matrix");
@@ -51,7 +55,7 @@ function changeOperatorFocus(clickedButton) {
 
 function calculateResult() {
   if (firstValue !== null && lastValue !== null) {
-    console.log("calculateResult()");
+    console.log(firstValue + " " + operator + " " + lastValue);
 
     switch (operator) {
       case "X":
@@ -73,13 +77,11 @@ function calculateResult() {
           screen.value = "Error";
         }
         break;
-
-      default:
-        screen.value = "Bug";
     }
 
     cleanOperatorUI();
-    firstValue = null;
+    firstValue = screen.value !== "Error" ? Number(screen.value) : null;
+    lastValue = null;
   } else
     throw new Error(
       "You should enter numbers and operator before getting a result.",
