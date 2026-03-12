@@ -7,21 +7,24 @@ numberButtons.forEach((btn) => {
   btn.addEventListener("click", addNumber);
 });
 
-let firstValue = null;
+let firstValue = "";
 let waitingForNumber = false;
-var lastValue = null;
+let lastValue = "";
 let operator = "";
 
 function addNumber(event) {
   if (screen.value === "Error") removeErrorMessage();
 
   if (waitingForNumber) {
-    screen.value = event.target.textContent;
-    lastValue = Number(screen.value);
-    waitingForNumber = false;
+    // screen.value = "";
+    lastValue += event.target.textContent;
+    screen.value = lastValue;
+
     console.log("Lastvalue" + lastValue);
   } else {
     screen.value += event.target.textContent;
+    waitingForNumber = false;
+    console.log(waitingForNumber);
   }
 
   operatorButtons.forEach((btn) => {
@@ -35,12 +38,14 @@ function removeErrorMessage() {
 }
 
 function doMath(op, clickedButton) {
-  if (screen.value !== "" ) {
-    firstValue = Number(screen.value);
+  if (screen.value !== "") {
+    if (lastValue !== "") return changeOperatorFocus(clickedButton);
+
+    firstValue = screen.value;
     console.log("firstvalue" + firstValue);
     operator = op;
+
     waitingForNumber = true;
-    console.log("Enter the matrix");
   }
   changeOperatorFocus(clickedButton);
 }
@@ -54,8 +59,10 @@ function changeOperatorFocus(clickedButton) {
 }
 
 function calculateResult() {
-  if (firstValue !== null && lastValue !== null) {
+  if (firstValue !== "" && lastValue !== "") {
     console.log(firstValue + " " + operator + " " + lastValue);
+    firstValue = Number(firstValue);
+    lastValue = Number(lastValue);
 
     switch (operator) {
       case "X":
@@ -80,8 +87,9 @@ function calculateResult() {
     }
 
     cleanOperatorUI();
-    firstValue = screen.value !== "Error" ? Number(screen.value) : null;
-    lastValue = null;
+    firstValue = screen.value !== "Error" ? screen.value : "";
+    console.log("first value at the end of the operation: " + firstValue);
+    lastValue = "";
   } else
     throw new Error(
       "You should enter numbers and operator before getting a result.",
@@ -89,10 +97,12 @@ function calculateResult() {
 }
 
 function resetValues() {
-  screen.value = "";
   cleanOperatorUI();
+  screen.value = "";
   operator = "";
-  firstValue = null;
+  firstValue = "";
+  lastValue = "";
+  waitingForNumber = false;
 }
 
 function cleanOperatorUI() {
