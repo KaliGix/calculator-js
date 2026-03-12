@@ -7,47 +7,51 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+
+    <div class="errorMessageContainer">
+      <span>You should enter two operands and one operator before getting a result.</span>
+    </div>
     <div class="calculator" id="calculator">
       <div class="container-screen">
         <input type="text" class="screen" disabled />
       </div>
 
       <div class="container-buttons">
-        <button type="button" class="btn addnumer">1</button>
-        <button type="button" class="btn addnumer">2</button>
-        <button type="button" class="btn addnumer">3</button>
+        <button type="button" class="btn addOperand">1</button>
+        <button type="button" class="btn addOperand">2</button>
+        <button type="button" class="btn addOperand">3</button>
         <button
           type="button"
           class="btn operator"
           onclick="addOperator(this.textContent, this)"
         > X
         </button>
-        <button type="button" class="btn addnumer">4</button>
-        <button type="button" class="btn addnumer">5</button>
-        <button type="button" class="btn addnumer">6</button>
+        <button type="button" class="btn addOperand">4</button>
+        <button type="button" class="btn addOperand">5</button>
+        <button type="button" class="btn addOperand">6</button>
         <button
           type="button"
           class="btn operator"
           onclick="addOperator(this.textContent, this)"
         > +
         </button>
-        <button type="button" class="btn addnumer">7</button>
-        <button type="button" class="btn addnumer">8</button>
-        <button type="button" class="btn addnumer">9</button>
+        <button type="button" class="btn addOperand">7</button>
+        <button type="button" class="btn addOperand">8</button>
+        <button type="button" class="btn addOperand">9</button>
         <button
           type="button"
           class="btn operator"
           onclick="addOperator(this.textContent, this)"
         > -
         </button>
-        <button type="button" class="btn addnumer">0</button>
+        <button type="button" class="btn addOperand">0</button>
         <button type="button" class="btn clear" onclick="resetValues()">
           AC
         </button>
         <button
           type="button"
-          class="btn"
-          id="result"
+          class="btn result"
+          
           onclick="calculateResult()"
         > =
         </button>

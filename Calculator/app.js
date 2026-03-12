@@ -1,11 +1,10 @@
 const screen = document.querySelector(".screen");
-const buttonResult = document.querySelector("#result");
+const buttonResult = document.querySelector(".result");
 const operatorButtons = document.querySelectorAll(".operator");
-const numberButtons = document.querySelectorAll(".addnumer");
+const numberButtons = document.querySelectorAll(".addOperand");
+const errorMessageContainer = document.querySelector(".errorMessageContainer");
 
-buttonResult.classList.add("result");
 buttonResult.addEventListener("click", changeResultFocus);
-
 
 numberButtons.forEach((btn) => {
   btn.addEventListener("click", addOperand);
@@ -31,6 +30,8 @@ function addOperand(event) {
 
 //UI Opernad Focus
 function changeOperandFocus(event){
+
+  errorMessageDisplay("none");
    operatorButtons.forEach((btn) => {
     btn.classList.remove("active");
   });
@@ -63,6 +64,7 @@ function addOperator(op, clickedButton) {
 
 function changeOperatorFocus(clickedButton) {
 
+  errorMessageDisplay("none");
    numberButtons.forEach((btn)=> {
     btn.classList.remove("operandActive")
   });
@@ -105,13 +107,16 @@ function calculateResult() {
         break;
     }
 
-    cleanOperatorUI();
+    resetButtonFocus();
     firstValue = screen.value !== "Error" ? screen.value : "";
     lastValue = "";
   } else
-    throw new Error(
-      "You should enter numbers and operator before getting a result.",
-    );
+    errorMessageDisplay("block");
+}
+
+function errorMessageDisplay(value){
+  console.log(value);
+  errorMessageContainer.style.display = value;
 }
 
 //UI Result Focus
@@ -134,7 +139,6 @@ function resetValues() {
   firstValue = "";
   lastValue = "";
   waitingForNumber = false;
-  console.clear();
 }
 
 function resetButtonFocus() {
@@ -143,6 +147,3 @@ function resetButtonFocus() {
   buttonResult.classList.remove("resultActive");
 }
 
-function cleanOperatorUI(){
-  operatorButtons.forEach((btn) => btn.classList.remove("active"));
-}

@@ -1,5 +1,5 @@
 .calculator{
-    margin: 10% auto;
+    margin: 5% auto;
     background-color: black;
     width: 400px;
     height: 500px;
@@ -75,4 +75,17 @@
 .operandActive{
       background-color: rgb(77, 76, 76);
       color: rgb(233, 170, 170);
+}
+
+.errorMessageContainer{
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+}
+
+.errorMessageContainer span{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 30px;
+    color: red;
+    
 }
