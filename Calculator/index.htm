@@ -1,42 +1,65 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Calculator</title>
-    <link rel="stylesheet" href="style.css">
-    
-</head>
-<body>
-    
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
     <div class="calculator" id="calculator">
+      <div class="container-screen">
+        <input type="text" class="screen" disabled />
+      </div>
 
-        <div class="container-screen">
-            <input type="text" class="screen" disabled> 
-        </div>
-
-        <div class="container-buttons">
-            <button type="button" class="btn addnumer" >1</button>
-            <button type="button" class="btn addnumer" >2</button>
-            <button type="button" class="btn addnumer" >3</button>
-            <button type="button" class="btn operator" onclick="doMath(this.textContent,this)">X</button>
-            <button type="button" class="btn addnumer">4</button>
-            <button type="button" class="btn addnumer" >5</button>
-            <button type="button" class="btn addnumer" >6</button>
-            <button type="button" class="btn operator" onclick="doMath(this.textContent,this)">+</button>
-            <button type="button" class="btn addnumer" >7</button>
-            <button type="button" class="btn addnumer">8</button>
-            <button type="button" class="btn addnumer">9</button>
-             <button type="button" class="btn operator" onclick="doMath(this.textContent, this)">-</button>
-            <button type="button" class="btn addnumer">0</button>
-            <button type="button" class="btn clear" onclick="resetValues()">AC</button>
-            <button type="button" class="btn result" onclick="calculateResult()">=</button>   
-            <button type="button" class="btn operator" onclick="doMath(this.textContent, this)">%</button>
-        </div>
-        
-    
+      <div class="container-buttons">
+        <button type="button" class="btn addnumer">1</button>
+        <button type="button" class="btn addnumer">2</button>
+        <button type="button" class="btn addnumer">3</button>
+        <button
+          type="button"
+          class="btn operator"
+          onclick="addOperator(this.textContent, this)"
+        > X
+        </button>
+        <button type="button" class="btn addnumer">4</button>
+        <button type="button" class="btn addnumer">5</button>
+        <button type="button" class="btn addnumer">6</button>
+        <button
+          type="button"
+          class="btn operator"
+          onclick="addOperator(this.textContent, this)"
+        > +
+        </button>
+        <button type="button" class="btn addnumer">7</button>
+        <button type="button" class="btn addnumer">8</button>
+        <button type="button" class="btn addnumer">9</button>
+        <button
+          type="button"
+          class="btn operator"
+          onclick="addOperator(this.textContent, this)"
+        > -
+        </button>
+        <button type="button" class="btn addnumer">0</button>
+        <button type="button" class="btn clear" onclick="resetValues()">
+          AC
+        </button>
+        <button
+          type="button"
+          class="btn"
+          id="result"
+          onclick="calculateResult()"
+        > =
+        </button>
+        <button
+          type="button"
+          class="btn operator"
+          onclick="addOperator(this.textContent, this)"
+        >/
+        </button>
+      </div>
     </div>
 
     <script type="text/javascript" src="app.js"></script>
-</body>
+  </body>
 </html>

@@ -46,9 +46,8 @@
   color: white;
 }
 
-.container-buttons .result{
+ .container-buttons .result{
   background-color: rgb(189, 29, 29);
-  /* grid-row: span 4; */
   color: white;
 }
 
@@ -65,4 +64,15 @@
 
 .errorMessage{
     color: red;
+}
+
+.resultActive{
+    background-color: rgb(231, 101, 101) !important;
+    color: rgb(17, 17, 17) !important;
+    /* width: 200px; */
+}
+
+.operandActive{
+      background-color: rgb(77, 76, 76);
+      color: rgb(233, 170, 170);
 }
