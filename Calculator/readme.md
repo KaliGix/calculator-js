@@ -95,7 +95,7 @@ No additional dependencies are required.
 
 * * * * *
 
-##ScreenShot
+ScreenShot
 
 ![alt text]({E522CCCA-3929-430F-B2C1-2B6A237066F8}.png)
 
