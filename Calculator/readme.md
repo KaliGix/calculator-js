@@ -4,7 +4,7 @@ JavaScript Calculator
 Description
 -----------
 
-This project is a simple calculator built using **HTML, CSS, and Vanilla JavaScript**.\
+This project is a simple calculator built using **HTML, CSS, and JavaScript**.\
 It allows users to perform basic arithmetic operations through an interactive interface.
 
 The main objective of the project was to practice **DOM manipulation, event handling, and state management in JavaScript** while building a functional user interface.
@@ -35,7 +35,7 @@ Technologies Used
 
 -   CSS3
 
--   JavaScript (Vanilla JavaScript)
+-   JavaScript 
 
 * * * * *
 
@@ -52,7 +52,7 @@ Four main variables control the logic:
 
 -   `lastValue` -- stores the second number entered
 
--   `waitingForNumber` -- indicates when the calculator expects the second operand
+-   `isOperatorPressed` -- indicates when the calculator expects the second operand
 
 When a number button is clicked, the `addOperand()` function updates the display and the current value.
 
@@ -83,7 +83,7 @@ How to Run the Project
 1.  Clone the repository
 
 ```
-git clone https://github.com/yourusername/calculator-project.git
+git clone https://github.com/KaliGix/calculator-js/tree/master/Calculator.git
 
 ```
 
@@ -94,6 +94,12 @@ git clone https://github.com/yourusername/calculator-project.git
 No additional dependencies are required.
 
 * * * * *
+
+##ScreenShot
+
+![alt text]({E522CCCA-3929-430F-B2C1-2B6A237066F8}.png)
+
+![alt text]({2B64C695-9242-4DA3-8B08-E85C872BC553}.png)
 
 What I Learned
 --------------
