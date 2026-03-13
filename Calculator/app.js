@@ -11,79 +11,39 @@ numberButtons.forEach((btn) => {
 });
 
 let firstValue = "";
-let waitingForNumber = false;
+let isOperandPressed = false;
 let lastValue = "";
 let operator = "";
+
+/********************* Logical Functions*************** */
 
 function addOperand(event) {
   if (screen.value === "Error") removeErrorMessage();
 
-  if (waitingForNumber) {
-    lastValue += event.target.textContent;
-    screen.value = lastValue;
     
-  } else {
-    screen.value += event.target.textContent;
-  }
+    if (isOperandPressed) {
+      lastValue +=   event.target.textContent;
+      screen.value = lastValue;
+    } else {
+      screen.value += event.target.textContent;
+    }
 
- changeOperandFocus(event);
-}
-
-//UI Operand Focus
-function changeOperandFocus(event){
-
-  errorMessageDisplay("none");
-   operatorButtons.forEach((btn) => {
-    btn.classList.remove("active");
-  });
-
-  buttonResult.classList.remove("resultActive");
-
-  numberButtons.forEach((btn)=> {
-    btn.classList.remove("operandActive");
-  });
-  
-  event.target.classList.add("operandActive")
-}
-
-//UI Error message
-function removeErrorMessage() {
-  screen.value = "";
-  screen.classList.remove("errorMessage");
+  changeOperandFocus(event);
 }
 
 function addOperator(op, clickedButton) {
   if (screen.value !== "" && screen.value !== "Error") {
     if (lastValue !== "") return changeOperatorFocus(clickedButton);
 
-    
     firstValue = screen.value;
     operator = op;
-    waitingForNumber = true;
-  
+    isOperandPressed = true;
   }
   changeOperatorFocus(clickedButton);
 }
 
-function changeOperatorFocus(clickedButton) {
-
-  errorMessageDisplay("none");
-   numberButtons.forEach((btn)=> {
-    btn.classList.remove("operandActive")
-  });
-
-  buttonResult.classList.remove("resultActive");
-
-  operatorButtons.forEach((btn) => {
-    btn.classList.remove("active");
-  });
-
-  clickedButton.classList.add("active");
-}
-
 function calculateResult() {
   if (firstValue !== "" && lastValue !== "") {
-    
     firstValue = Number(firstValue);
     lastValue = Number(lastValue);
 
@@ -105,7 +65,7 @@ function calculateResult() {
         else {
           screen.classList.add("errorMessage");
           screen.value = "Error";
-          waitingForNumber = false;
+          isOperandPressed = false;
         }
         break;
     }
@@ -113,25 +73,7 @@ function calculateResult() {
     resetButtonFocus();
     firstValue = screen.value !== "Error" ? screen.value : "";
     lastValue = "";
-  } else
-    errorMessageDisplay("block");
-}
-
-function errorMessageDisplay(value){
-  errorMessageContainer.style.display = value;
-}
-
-//UI Result Focus
-function changeResultFocus() {
-  operatorButtons.forEach((btn) => {
-    btn.classList.remove("active");
-  });
-
-  numberButtons.forEach((btn)=> {
-    btn.classList.remove("operandActive");
-  });
-
-  buttonResult.classList.add("resultActive");
+  } else errorMessageDisplay("block");
 }
 
 function resetValues() {
@@ -140,12 +82,56 @@ function resetValues() {
   operator = "";
   firstValue = "";
   lastValue = "";
-  waitingForNumber = false;
+  isOperandPressed = false;
+}
+
+//**************** UI Functions********** */
+
+function errorMessageDisplay(value) {
+  errorMessageContainer.style.display = value;
+}
+
+//UI Operand Focus
+function changeOperandFocus(event) {
+  errorMessageDisplay("none");
+  clearFocus();
+  event.target.classList.add("operandActive");
+}
+
+//UI Error message
+function removeErrorMessage() {
+  screen.value = "";
+  screen.classList.remove("errorMessage");
+}
+
+function changeOperatorFocus(clickedButton) {
+  errorMessageDisplay("none");
+  clearFocus();
+  clickedButton.classList.add("active");
+}
+
+//UI Result Focus
+function changeResultFocus() {
+  clearFocus();
+  buttonResult.classList.add("resultActive");
+}
+
+function clearFocus() {
+  numberButtons.forEach((btn) => {
+    btn.classList.remove("operandActive");
+  });
+
+  buttonResult.classList.remove("resultActive");
+
+  operatorButtons.forEach((btn) => {
+    btn.classList.remove("active");
+  });
 }
 
 function resetButtonFocus() {
   operatorButtons.forEach((btn) => btn.classList.remove("active"));
-  numberButtons.forEach((btn)=>{btn.classList.remove("operandActive")});
+  numberButtons.forEach((btn) => {
+    btn.classList.remove("operandActive");
+  });
   buttonResult.classList.remove("resultActive");
 }
-
