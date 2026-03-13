@@ -95,7 +95,11 @@ No additional dependencies are required.
 
 * * * * *
 
+<<<<<<< HEAD
 Screenshots
+=======
+ScreenShot
+>>>>>>> db3cc740f2e3f5cca334b512f8759772e14eb0ed
 
 ![alt text]({E522CCCA-3929-430F-B2C1-2B6A237066F8}.png)
 
