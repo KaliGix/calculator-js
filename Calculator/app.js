@@ -21,6 +21,7 @@ function addOperand(event) {
   if (waitingForNumber) {
     lastValue += event.target.textContent;
     screen.value = lastValue;
+    
   } else {
     screen.value += event.target.textContent;
   }
@@ -28,7 +29,7 @@ function addOperand(event) {
  changeOperandFocus(event);
 }
 
-//UI Opernad Focus
+//UI Operand Focus
 function changeOperandFocus(event){
 
   errorMessageDisplay("none");
@@ -55,9 +56,11 @@ function addOperator(op, clickedButton) {
   if (screen.value !== "" && screen.value !== "Error") {
     if (lastValue !== "") return changeOperatorFocus(clickedButton);
 
+    
     firstValue = screen.value;
     operator = op;
     waitingForNumber = true;
+  
   }
   changeOperatorFocus(clickedButton);
 }
@@ -115,7 +118,6 @@ function calculateResult() {
 }
 
 function errorMessageDisplay(value){
-  console.log(value);
   errorMessageContainer.style.display = value;
 }
 
