@@ -117,6 +117,8 @@ Through this project I practiced:
 
 -   Handling edge cases such as division by zero
 
+-   Length of each operand
+
 * * * * *
 
 Possible Future Improvements
